@@ -1,0 +1,248 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PagCentral</title>
+    {% tailwind_css %}
+</head>
+<body>
+  <div>
+    <div class="bg-white">
+  <header class="absolute inset-x-0 top-0 z-50">
+    <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <div class="flex lg:flex-1">
+        <a href="#" class="-m-1.5 p-1.5">
+          <span class="sr-only">Your Company</span>
+          <img class="h-8 w-auto" src="https://i.pinimg.com/736x/33/69/4c/33694c0f97b2af29c198a98c6c38beaa.jpg" alt="">
+        </a>
+      </div>
+      <div class="flex lg:hidden">
+        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+          <span class="sr-only">Open main menu</span>
+          <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+      <div class="hidden lg:flex lg:gap-x-12">
+        <a href="#" class="text-sm/6 font-semibold text-[#41302A]">Lo más vendido</a>
+        <a href="#" class="text-sm/6 font-semibold text-[#41302A]">Novedades</a>
+        <a href="#" class="text-sm/6 font-semibold text-[#41302A]">Ficción</a>
+        <a href="#" class="text-sm/6 font-semibold text-[#41302A]">No ficción</a>
+        <a href="#" class="text-sm/6 font-semibold text-[#41302A]">Infantil</a>
+        <a href="#" class="text-sm/6 font-semibold text-[#41302A]">Juvenil</a>
+      </div>
+
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end items-center space-x-4">
+        <a href="#" class="text-sm/6 font-semibold text-[#23151C]"
+        >Log in <span aria-hidden="true">&rarr;</span></a>
+        <a href="/carrito" class="text-gray-900 hover:text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+            </svg>
+        </a>
+      </div>
+
+    </nav>
+    <!-- Mobile menu, show/hide based on menu open state. -->
+    <div class="lg:hidden" role="dialog" aria-modal="true">
+      <!-- Parte responsive de la barra menu de arriba -->
+      <div class="fixed inset-0 z-50"></div>
+      <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div class="flex items-center justify-between">
+          <a href="#" class="-m-1.5 p-1.5">
+            <span class="sr-only">Your Company</span>
+            <img class="h-8 w-auto" src="https://i.pinimg.com/736x/33/69/4c/33694c0f97b2af29c198a98c6c38beaa.jpgw" alt="">
+          </a>
+          <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+            <span class="sr-only">Close menu</span>
+            <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-500/10">
+            <div class="space-y-2 py-6">
+              <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100">Lo más vendido</a>
+              <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100">Novedades</a>
+              <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100">Ficción</a>
+              <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100">No ficción</a>
+              <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100">Infantil</a>
+              <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100">Juvenil</a>
+            </div>
+            <div class="py-6">
+              <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-100">Log in</a>
+            </div>
+            <div class="mt-6 flow-root">
+                <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-100 flex items-center gap-2"> Carrito de Compras
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+                    </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+<!-- Parte central de la pagina -->
+  <div class="relative isolate px-6 pt-14 lg:px-8">
+    <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+      <div class="relative left-[calc(0%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#DFC4A0] to-[#DFC4A0] opacity-50 sm:left-[calc(70%-30rem)] sm:w-288.75" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+    </div>
+    <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+      <div class="hidden sm:mb-8 sm:flex sm:justify-center"></div>
+    </div>
+    <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">
+      <div class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-[#C13B22] to-[#E0A033] opacity-30 sm:left-[calc(50%+36rem)] sm:w-288.75" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+    </div>
+  </div>
+<!-- Parte de productos "Lo más vendido"-->
+  <div class="max-w-2xl px-4 py-2 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8">
+    <h2 class="text-2xl font-bold tracking-tight text-[#23151C]">Ficción</h2>
+    <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      <div class="group relative">
+        <img src="https://i.pinimg.com/736x/09/4d/0a/094d0ab8523ae9ddf8a46489d16d839f.jpg" class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-[#23151C]">
+              <a href="#">
+                <span aria-hidden="true" class="absolute inset-0"></span>
+                Basic Tee
+              </a>
+            </h3>
+            <p class="mt-1 text-sm text-[#23151C]">Black</p>
+          </div>
+          <p class="text-sm font-medium text-[#23151C]">$35.00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Parte de productos "Novedades" -->
+  <div class="max-w-2xl px-4 py-2 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8">
+    <h2 class="text-2xl font-bold tracking-tight text-[#23151C]">Novedades</h2>
+    <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      <div class="group relative">
+        <img src="https://edit.org/images/cat/portadas-libros-big-2019101610.jpg" class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-[#23151C]">
+              <a href="#">
+                <span aria-hidden="true" class="absolute inset-0"></span>
+                Basic Tee
+              </a>
+            </h3>
+            <p class="mt-1 text-sm text-[#23151C]">Black</p>
+          </div>
+          <p class="text-sm font-medium text-[#23151C]">$35.00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Parte de productos "Ficción" -->
+  <div class="max-w-2xl px-4 py-2 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8">
+    <h2 class="text-2xl font-bold tracking-tight text-[#23151C]">Ficción</h2>
+    <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      <div class="group relative">
+        <img src="https://images.ecestaticos.com/PIK0kKxTNRVBMbAp-kQooTdcLnI=/2x1:1667x2560/1440x1920/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F78f%2F762%2Ff46%2F78f762f46de147f15e6fbda967974551.jpg" class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-[#23151C]">
+              <a href="#">
+                <span aria-hidden="true" class="absolute inset-0"></span>
+                Basic Tee
+              </a>
+            </h3>
+            <p class="mt-1 text-sm text-[#23151C]">Black</p>
+          </div>
+          <p class="text-sm font-medium text-[#23151C]">$35.00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Parte productos "No ficción" -->
+  <div class="max-w-2xl px-4 py-2 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8">
+    <h2 class="text-2xl font-bold tracking-tight text-[#23151C]">No ficción</h2>
+    <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      <div class="group relative">
+        <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1715701901-autobiografia-malala-66438877dde9f.jpg?crop=1xw:1xh;center,top&resize=980:*" class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-[#23151C]">
+              <a href="#">
+                <span aria-hidden="true" class="absolute inset-0"></span>
+                Basic Tee
+              </a>
+            </h3>
+            <p class="mt-1 text-sm text-[#23151C]">Black</p>
+          </div>
+          <p class="text-sm font-medium text-[#23151C]">$35.00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Parte de productos "Infantil" -->
+  <div class="max-w-2xl px-4 py-2 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8">
+    <h2 class="text-2xl font-bold tracking-tight text-[#23151C]">Infantil</h2>
+    <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      <div class="group relative">
+        <img src="https://www.crisol.com.pe/media/catalog/product/cache/f6d2c62455a42b0d712f6c919e880845/9/7/9786125020208_8t8qmxx6r0hkrpjj.jpg" class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-[#23151C]">
+              <a href="#">
+                <span aria-hidden="true" class="absolute inset-0"></span>
+                Basic Tee
+              </a>
+            </h3>
+            <p class="mt-1 text-sm text-[#23151C]">Black</p>
+          </div>
+          <p class="text-sm font-medium text-[#23151C]">$35.00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Parte de productos "Juvenil" -->
+  <div class="max-w-2xl px-4 py-2 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8">
+    <h2 class="text-2xl font-bold tracking-tight text-[#23151C]">Juvenil</h2>
+    <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      <div class="group relative">
+        <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1740746707-51oXDQhF8ZL._SL500_.jpg?crop=1xw:0.996xh;center,top&resize=980:*" class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-[#23151C]">
+              <a href="#">
+                <span aria-hidden="true" class="absolute inset-0"></span>
+                Basic Tee
+              </a>
+            </h3>
+            <p class="mt-1 text-sm text-[#23151C]">Black</p>
+          </div>
+          <p class="text-sm font-medium text-[#23151C]">$35.00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Pie de cabecera -->
+ <footer class="bg-[#C13B22] text-white">
+  <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row justify-between items-center">
+      <p class="text-sm">&copy; 2025 Mi Sitio. Todos los derechos reservados.</p>
+      <div class="flex space-x-4 mt-4 sm:mt-0">
+        <a href="#" class="hover:text-black">Facebook</a>
+        <a href="#" class="hover:text-black">Instagram</a>
+        <a href="#" class="hover:text-black">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+</div>
+</body>
+</html>
+
