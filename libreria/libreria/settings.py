@@ -42,7 +42,11 @@ INSTALLED_APPS = [
     'django_browser_reload',    
 ]
 
+STATIC_URL = '/static/'
+
 TAILWIND_APP_NAME = 'theme'
+
+TAILWIND_DEV_MODE = True
 
 INTERNAL_IPS = [
     "127.0.0.1",
