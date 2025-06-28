@@ -1,0 +1,21 @@
+
+{% block content %}
+<h2>Tu carrito</h2>
+
+{% if items %}
+  <ul>
+    {% for item in items %}
+      <li>
+        {{ item.libro.titulo }} - {{ item.cantidad }} x ${{ item.libro.precio }} =
+        <strong>${{ item.subtotal }}</strong>
+        <a href="{% url 'eliminar_item' item.id %}">Eliminar</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p>Total: <strong>${{ total }}</strong></p>
+
+{% else %}
+  <p>Tu carrito está vacío 🛒</p>
+{% endif %}
+{% endblock %}
