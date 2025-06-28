@@ -10,6 +10,7 @@ __pycache__/
 # Configuración local
 .env
 .vscode/
+.venv
 
 # Logs
 *.log
