@@ -1,10 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'book-cream': '#F5F2E8',
+                        'book-brown': '#8B4513',
+                        'book-dark': '#2C1810',
+                        'book-gold': '#DAA520'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-book-cream min-h-screen flex items-center justify-center">
 
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
+        <h2 class="text-3xl font-bold text-center text-book-dark mb-6">Iniciar sesión</h2>
 
-{% block content %}
-<h2>Iniciar sesión</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Ingresar</button>
-</form>
-{% endblock %}
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="w-full bg-book-gold text-white py-2 rounded-lg hover:bg-yellow-600 transition">
+                Ingresar
+            </button>
+        </form>
+
+        <p class="mt-4 text-sm text-center">
+            ¿No tienes una cuenta? <a href="{% url 'registro' %}" class="text-book-gold hover:underline">Regístrate</a>
+        </p>
+    </div>
+
+</body>
+</html>

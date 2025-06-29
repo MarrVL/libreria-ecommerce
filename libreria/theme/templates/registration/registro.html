@@ -1,11 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse - Lecturama</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'book-cream': '#F5F2E8',
+                        'book-brown': '#8B4513',
+                        'book-dark': '#2C1810',
+                        'book-gold': '#DAA520'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-book-cream min-h-screen flex items-center justify-center">
 
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
+        <h2 class="text-3xl font-bold text-center text-book-dark mb-6">Crear una cuenta</h2>
 
-{% block content %}
-<h2>Registrarse</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Crear cuenta</button>
-</form>
-<a href="{% url 'login' %}">Ya tengo cuenta</a>
-{% endblock %}
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+
+            <div>
+                <label for="{{ form.username.id_for_label }}" class="block font-medium text-book-dark mb-1">Usuario</label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.username.errors }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.password1.id_for_label }}" class="block font-medium text-book-dark mb-1">Contraseña</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <ul class="text-red-500 text-sm mt-1 list-disc list-inside">
+                        {% for error in form.password1.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.password2.id_for_label }}" class="block font-medium text-book-dark mb-1">Confirmar Contraseña</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.password2.errors }}</p>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="w-full bg-book-gold text-white py-2 rounded-lg hover:bg-yellow-600 transition">
+                Registrarme
+            </button>
+        </form>
+
+        <p class="mt-4 text-sm text-center">
+            ¿Ya tienes cuenta? <a href="{% url 'login' %}" class="text-book-gold hover:underline">Inicia sesión</a>
+        </p>
+    </div>
+
+</body>
+</html>
