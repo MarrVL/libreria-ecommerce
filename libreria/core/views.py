@@ -1,11 +1,29 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Libro, Carrito, ItemCarrito
+from .models import Libro, Carrito, ItemCarrito, Categoria
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
-    return render(request, 'pagCentral.html')
+    categorias = Categoria.objects.all().order_by('nombre')
+    libros_por_categoria = {}
+    for categoria in categorias:
+        libros_en_categoria = categoria.libros.all()
+        libros_por_categoria[categoria.nombre] = libros_en_categoria
+        print(f"Categoría: {categoria.nombre}, Libros encontrados: {libros_en_categoria.count()}")
+        for libro in libros_en_categoria:
+            print(f"  - {libro.titulo} (ID: {libro.id})")
+
+    context = {
+        'libros_por_categoria': libros_por_categoria,
+        'categorias_disponibles': categorias,
+    }
+    return render(request, 'pagCentral.html', context)
+
+def libros_por_categoria(request, categoria_slug):
+    categoria = get_object_or_404(Categoria, nombre__iexact=categoria_slug.replace('-', ' ')) # Asume que el slug es el nombre normalizado
+    libros = Libro.objects.filter(categoria=categoria)
+    return render(request, 'libros/lista_categoria.html', {'categoria': categoria, 'libros': libros})
 
 def registro(request):
     if request.method == 'POST':
