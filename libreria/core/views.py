@@ -55,4 +55,3 @@ def eliminar_item(request, item_id):
 def libro_detail(request, libro_id):
     libro = get_object_or_404(Libro, id=libro_id)
     return render(request, 'libros/libro_detail.html', {'libro': libro})
-
