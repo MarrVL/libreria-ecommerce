@@ -1,10 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>El Capital - PagCentral</title>
+    <title>{{ libro.titulo }} - Lecturama</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -22,525 +22,195 @@
     </script>
 </head>
 <body class="bg-book-cream">
-    <!-- Header -->
+    <!-- Cabezera -->
     <header class="bg-white shadow-lg sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <a href="/" class="flex items-center">
-                        <img class="h-10 w-10 mr-3" src="https://cdn-icons-png.flaticon.com/512/374/374980.png" alt="PagCentral">
-                        <span class="text-2xl font-bold text-book-dark">PagCentral</span>
-                    </a>
+                    <img class="h-10 w-10 mr-3" src="{% static 'img/logo_ecommerce_libreria.png' %}" alt="Logo_Lecturama">
+                    <span class="text-2xl font-bold text-book-dark">Lecturama</span>
                 </div>
                 
-                <!-- Right side -->
+                <!-- Navegación de escritorio -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#bestsellers" class="text-book-dark hover:text-book-gold transition-colors font-medium">Lo más vendido</a>
+                    <a href="#new" class="text-book-dark hover:text-book-gold transition-colors font-medium">Novedades</a>
+                    <a href="#fiction" class="text-book-dark hover:text-book-gold transition-colors font-medium">Ficción</a>
+                    <a href="#nonfiction" class="text-book-dark hover:text-book-gold transition-colors font-medium">No ficción</a>
+                    <a href="#kids" class="text-book-dark hover:text-book-gold transition-colors font-medium">Infantil</a>
+                    <a href="#teen" class="text-book-dark hover:text-book-gold transition-colors font-medium">Juvenil</a>
+                </div>
+                
+                <!-- Lado derecho -->
                 <div class="flex items-center space-x-4">
                     <button class="text-book-dark hover:text-book-gold transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </button>
-                    <a href="/carrito" class="relative text-book-dark hover:text-book-gold transition-colors">
+                    <a href="/auth/login/" class="text-book-dark hover:text-book-gold transition-colors">Iniciar sesión</a>
+                    <a href="/registro/" class="text-book-dark hover:text-book-gold transition-colors text-sm">Registrarse</a>
+                    <a href="/carrito/" class="relative text-book-dark hover:text-book-gold transition-colors">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
                         </svg>
-                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
                     </a>
+                </div>
+                
+                <!-- Botón de menú -->
+                <div class="md:hidden">
+                    <button type="button" class="text-book-dark hover:text-book-gold">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </nav>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Breadcrumb -->
-        <nav class="flex mb-8" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center">
-                    <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-book-gold">
-                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
-                        </svg>
-                        Inicio
-                    </a>
-                </li>
-                <li>
-                    <div class="flex items-center">
-                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-                        </svg>
-                        <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-book-gold">Ficción</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="flex items-center">
-                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-                        </svg>
-                        <span class="ml-1 text-sm font-medium text-book-gold">El Capital</span>
-                    </div>
-                </li>
-            </ol>
-        </nav>
-
-        <!-- Product Details -->
-        <div class="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
-            <!-- Image gallery -->
-            <div class="flex flex-col-reverse">
-                <!-- Image selector -->
-                <div class="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
-                    <div class="grid grid-cols-4 gap-6" aria-orientation="horizontal" role="tablist">
-                        <button class="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-book-gold">
-                            <span class="sr-only">Vista 1</span>
-                            <span class="absolute inset-0 rounded-md overflow-hidden">
-                                <img src="https://i.pinimg.com/736x/09/4d/0a/094d0ab8523ae9ddf8a46489d16d839f.jpg" alt="" class="w-full h-full object-center object-cover">
-                            </span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="w-full aspect-w-1 aspect-h-1">
-                    <div class="relative">
-                        <img src="https://i.pinimg.com/736x/09/4d/0a/094d0ab8523ae9ddf8a46489d16d839f.jpg" 
-                             alt="El Capital - Karl Marx" 
-                             class="w-full h-full object-center object-cover sm:rounded-lg shadow-xl">
-                        <!-- Badge -->
-                        <div class="absolute top-4 left-4">
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-book-gold text-white">
-                                Bestseller
-                            </span>
-                        </div>
-                    </div>
-                </div>
+    <!-- Contenido Principal -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <!-- Titulo del libro -->
+            <div class="bg-gradient-to-r from-book-brown to-book-gold px-8 py-6">
+                <h1 class="text-center text-3xl font-bold text-white">{{ libro.titulo }}</h1>
             </div>
 
-            <!-- Product info -->
-            <div class="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
-                <h1 class="text-4xl font-bold tracking-tight text-book-dark">El Capital</h1>
-                
-                <div class="mt-3">
-                    <h2 class="sr-only">Información del producto</h2>
-                    <p class="text-3xl text-book-gold font-semibold">$35.00</p>
+            <!-- Contenido del libro -->
+            <div class="p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Imagen del libro -->
+                    <div class="text-center">
+                        {% if libro.imagen %}
+                            <img src="{{ libro.imagen.url }}" 
+                                 alt="{{ libro.titulo }}" 
+                                 class="w-full max-w-md mx-auto rounded-xl shadow-xl transition-transform duration-300 hover:scale-105">
+                        {% else %}
+                            <div class="w-full max-w-md mx-auto aspect-[3/4] bg-gradient-to-r from-book-brown to-book-gold rounded-xl shadow-xl flex items-center justify-center">
+                                <span class="text-white font-bold text-xl">Sin imagen</span>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Informacion del libro -->
+                    <div class="space-y-6">
+                        <!-- Precio -->
+                        <div class="flex items-center p-6 bg-gradient-to-r from-book-cream to-white rounded-xl border-l-4 border-book-gold">
+                            <span class="font-semibold text-book-dark text-lg min-w-[120px]">Precio:</span>
+                            <span class="text-3xl font-bold text-book-gold">${{ libro.precio }}</span>
+                        </div>
+
+                        <!-- Stock -->
+                        <div class="flex items-center p-6 bg-gradient-to-r from-book-cream to-white rounded-xl border-l-4 border-book-gold">
+                            <span class="font-semibold text-book-dark text-lg min-w-[120px]">Stock:</span>
+                            <span class="text-gray-700 text-lg">{{ libro.stock }} unidades</span>
+                        </div>
+
+                        <!-- Editorial -->
+                        <div class="flex items-center p-6 bg-gradient-to-r from-book-cream to-white rounded-xl border-l-4 border-book-gold">
+                            <span class="font-semibold text-book-dark text-lg min-w-[120px]">Editorial:</span>
+                            <span class="text-gray-700 text-lg">{{ libro.editorial }}</span>
+                        </div>
+
+                        <!-- Autores -->
+                        <div class="flex items-center p-6 bg-gradient-to-r from-book-cream to-white rounded-xl border-l-4 border-book-gold">
+                            <span class="font-semibold text-book-dark text-lg min-w-[120px]">Autores:</span>
+                            <span class="text-gray-700 text-lg">
+                                {% for autor in libro.autores.all %}
+                                    {{ autor.nombre }} {{ autor.apellido }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </span>
+                        </div>
+
+                        <!-- Añadir al carrito -->
+                        <div class="pt-6">
+                            <a href="{% url 'agregar_al_carrito' libro.id %}" 
+                               class="w-full inline-block bg-gradient-to-r from-book-brown to-book-gold text-white text-center py-4 px-8 rounded-full font-semibold text-xl transition-all duration-200 hover:shadow-lg hover:scale-105">
+                                Agregar al carrito
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Reviews -->
-                <div class="mt-3">
-                    <h3 class="sr-only">Reseñas</h3>
-                    <div class="flex items-center">
-                        <div class="flex items-center">
-                            <!-- Stars -->
-                            <svg class="text-book-gold h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                <!-- Descripcion del libro -->
+                {% if libro.descripcion %}
+                <div class="mt-12 p-8 bg-gradient-to-r from-book-cream to-white rounded-xl border-l-4 border-book-gold">
+                    <h3 class="text-2xl font-semibold text-book-dark mb-4">Descripción:</h3>
+                    <p class="text-gray-700 leading-relaxed text-lg">{{ libro.descripcion }}</p>
+                </div>
+                {% endif %}
+
+                <!-- Enlace -->
+                <div class="mt-8 text-center">
+                    <a href="/" class="inline-flex items-center text-book-gold hover:text-book-brown font-medium text-lg transition-colors">
+                        <span class="mr-2">←</span>
+                        Volver a la tienda
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="bg-book-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img class="h-8 w-8 mr-2" src="{% static 'img/logo_ecommerce_libreria.png' %}" alt="Logo_Lecturama">
+                        <span class="text-xl font-bold">Lecturama</span>
+                    </div>
+                    <p class="text-gray-300">Tu librería online de confianza. Descubre miles de libros para todos los gustos.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Categorías</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-book-gold transition-colors">Lo más vendido</a></li>
+                        <li><a href="#" class="hover:text-book-gold transition-colors">Novedades</a></li>
+                        <li><a href="#" class="hover:text-book-gold transition-colors">Ficción</a></li>
+                        <li><a href="#" class="hover:text-book-gold transition-colors">No ficción</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Atención al Cliente</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-book-gold transition-colors">Contacto</a></li>
+                        <li><a href="#" class="hover:text-book-gold transition-colors">Envíos</a></li>
+                        <li><a href="#" class="hover:text-book-gold transition-colors">Devoluciones</a></li>
+                        <li><a href="#" class="hover:text-book-gold transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Síguenos</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-book-gold transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z"/>
                             </svg>
-                            <svg class="text-book-gold h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-book-gold transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33zM9.75 15.02l5.75-3.27-5.75-3.27v6.54z"/>
                             </svg>
-                            <svg class="text-book-gold h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-book-gold transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.748-1.378 0 0-.599 2.295-.744 2.852-.269 1.041-1.006 2.35-1.495 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z.017 0z"/>
                             </svg>
-                            <svg class="text-book-gold h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                            </svg>
-                            <svg class="text-gray-300 h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                            </svg>
-                        </div>
-                        <p class="sr-only">4 de 5 estrellas</p>
-                        <a href="#reviews" class="ml-3 text-sm font-medium text-book-gold hover:text-book-brown">
-                            117 reseñas
                         </a>
                     </div>
                 </div>
-
-                <!-- Product details -->
-                <div class="mt-6">
-                    <h3 class="text-sm font-medium text-book-dark">Detalles del libro</h3>
-                    <div class="mt-4 space-y-2">
-                        <p class="text-sm text-gray-600"><strong>Autor:</strong> Karl Marx</p>
-                        <p class="text-sm text-gray-600"><strong>Editorial:</strong> Siglo XXI Editores</p>
-                        <p class="text-sm text-gray-600"><strong>Año:</strong> 2017</p>
-                        <p class="text-sm text-gray-600"><strong>Páginas:</strong> 792</p>
-                        <p class="text-sm text-gray-600"><strong>ISBN:</strong> 978-84-323-1875-4</p>
-                        <p class="text-sm text-gray-600"><strong>Idioma:</strong> Español</p>
-                    </div>
-                </div>
-
-                <!-- Stock status -->
-                <div class="mt-6">
-                    <div class="flex items-center">
-                        <svg class="flex-shrink-0 h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                        </svg>
-                        <p class="ml-2 text-sm text-gray-500">En stock (15 disponibles)</p>
-                    </div>
-                </div>
-
-                <!-- Add to cart -->
-                <div class="mt-8 flex space-x-4">
-                    <div class="flex items-center border border-gray-300 rounded-md">
-                        <button class="px-3 py-2 text-gray-600 hover:text-book-gold transition-colors" onclick="updateQuantity(-1)">-</button>
-                        <input type="number" id="quantity" value="1" min="1" max="15" class="w-16 text-center border-0 bg-transparent focus:ring-0">
-                        <button class="px-3 py-2 text-gray-600 hover:text-book-gold transition-colors" onclick="updateQuantity(1)">+</button>
-                    </div>
-                    
-                    <button type="button" onclick="addToCart()" class="flex-1 bg-book-dark border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-book-brown focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-book-gold transition-all duration-300">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.8 9H19M7 13v8a2 2 0 002 2h6a2 2 0 002-2v-8m-9 4h6"/>
-                        </svg>
-                        Agregar al carrito
-                    </button>
-                </div>
-
-                <!-- Wishlist and share -->
-                <div class="mt-6 flex space-x-4">
-                    <button type="button" class="flex items-center text-sm text-gray-500 hover:text-book-gold transition-colors">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                        </svg>
-                        Agregar a favoritos
-                    </button>
-                    <button type="button" class="flex items-center text-sm text-gray-500 hover:text-book-gold transition-colors">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
-                        </svg>
-                        Compartir
-                    </button>
-                </div>
-
-                <!-- Shipping info -->
-                <div class="mt-8 border-t border-gray-200 pt-8">
-                    <h3 class="text-sm font-medium text-book-dark">Información de envío</h3>
-                    <div class="mt-4 space-y-3">
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
-                                <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1V8a1 1 0 00-1-1h-3z"/>
-                            </svg>
-                            <span class="text-sm text-gray-600">Envío gratis en pedidos mayores a $50</span>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-sm text-gray-600">Devoluciones gratuitas dentro de 30 días</span>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-sm text-gray-600">Compra 100% segura y protegida</span>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2024 Lecturama. Todos los derechos reservados.</p>
             </div>
         </div>
-
-        <!-- Product description -->
-        <div class="mt-16">
-            <div class="border-b border-gray-200">
-                <nav class="-mb-px flex space-x-8">
-                    <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" onclick="showTab('description')">
-                        Descripción
-                    </button>
-                    <button class="border-book-gold text-book-gold whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" onclick="showTab('details')">
-                        Detalles
-                    </button>
-                    <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" onclick="showTab('reviews')">
-                        Reseñas (117)
-                    </button>
-                </nav>
-            </div>
-
-            <div class="mt-8">
-                <div id="description-tab" class="hidden">
-                    <div class="prose prose-lg max-w-none text-gray-500">
-                        <p>
-                            "El Capital" es la obra principal de Karl Marx y una de las obras más influyentes en la historia del pensamiento económico y político. 
-                            En este primer volumen, Marx analiza de manera profunda el sistema capitalista, explorando conceptos fundamentales como el valor, 
-                            el trabajo, la plusvalía y la acumulación de capital.
-                        </p>
-                        <p>
-                            A través de un riguroso análisis económico, Marx desvela los mecanismos internos del capitalismo y las contradicciones 
-                            que considera inherentes a este sistema económico. La obra no solo es un tratado de economía política, sino también 
-                            una crítica social que busca comprender las relaciones de poder en la sociedad capitalista.
-                        </p>
-                        <p>
-                            Esta edición incluye notas explicativas y un glosario de términos que facilitan la comprensión de los conceptos más complejos, 
-                            haciendo accesible esta obra fundamental tanto para estudiantes como para lectores interesados en la economía política.
-                        </p>
-                    </div>
-                </div>
-
-                <div id="details-tab">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="text-lg font-medium text-book-dark mb-4">Especificaciones</h4>
-                            <dl class="space-y-3">
-                                <div class="flex justify-between">
-                                    <dt class="text-sm text-gray-600">Formato:</dt>
-                                    <dd class="text-sm font-medium text-gray-900">Tapa blanda</dd>
-                                </div>
-                                <div class="flex justify-between">
-                                    <dt class="text-sm text-gray-600">Dimensiones:</dt>
-                                    <dd class="text-sm font-medium text-gray-900">15 x 23 cm</dd>
-                                </div>
-                                <div class="flex justify-between">
-                                    <dt class="text-sm text-gray-600">Peso:</dt>
-                                    <dd class="text-sm font-medium text-gray-900">890g</dd>
-                                </div>
-                                <div class="flex justify-between">
-                                    <dt class="text-sm text-gray-600">Edición:</dt>
-                                    <dd class="text-sm font-medium text-gray-900">1ª edición</dd>
-                                </div>
-                            </dl>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-medium text-book-dark mb-4">Contenido</h4>
-                            <ul class="space-y-2 text-sm text-gray-600">
-                                <li>• Prólogo del traductor</li>
-                                <li>• Introducción histórica</li>
-                                <li>• Libro Primero: El proceso de producción del capital</li>
-                                <li>• Sección Primera: Mercancía y dinero</li>
-                                <li>• Sección Segunda: La transformación del dinero en capital</li>
-                                <li>• Sección Tercera: La producción de la plusvalía absoluta</li>
-                                <li>• Sección Cuarta: La producción de la plusvalía relativa</li>
-                                <li>• Glosario de términos</li>
-                                <li>• Índice analítico</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="reviews-tab" class="hidden">
-                    <div class="space-y-8">
-                        <!-- Review summary -->
-                        <div class="bg-white rounded-lg p-6 shadow-sm">
-                            <div class="flex items-center">
-                                <div class="flex items-center">
-                                    <div class="flex items-center">
-                                        <svg class="text-book-gold h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                        </svg>
-                                        <span class="ml-1 text-xl font-semibold text-gray-900">4.1</span>
-                                    </div>
-                                    <span class="ml-2 text-sm text-gray-500">basado en 117 reseñas</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Individual reviews -->
-                        <div class="space-y-6">
-                            <div class="border-b border-gray-200 pb-6">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <div class="flex items-center">
-                                            <svg class="text-book-gold h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="text-book-gold h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="text-book-gold h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="text-book-gold h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="text-gray-300 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                        </div>
-                                        <span class="ml-2 text-sm font-medium text-gray-900">María González</span>
-                                    </div>
-                                    <span class="text-sm text-gray-500">Hace 2 semanas</span>
-                                </div>
-                                <p class="mt-4 text-gray-600">
-                                    Excelente análisis económico. Marx presenta de manera clara y sistemática los mecanismos del capitalismo. 
-                                    La traducción es muy buena y las notas explicativas ayudan mucho a entender conceptos complejos.
-                                </p>
-                            </div>
-
-                            <div class="border-b border-gray-200 pb-6">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <div class="flex items-center">
-                                            <svg class="text-book-gold h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="text-book-gold h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="text-book-gold h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="text-book-gold h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="text-book-gold h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                        </div>
-                                        <span class="ml-2 text-sm font-medium text-gray-900">Carlos Rodríguez</span>
-                                    </div>
-                                    <span class="text-sm text-gray-500">Hace 1 mes</span>
-                                </div>
-                                <p class="mt-4 text-gray-600">
-                                    Obra fundamental para entender el capitalismo. Aunque es densa, vale la pena el esfuerzo. 
-                                    Recomendable para estudiantes de economía y ciencias sociales.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Related products -->
-        <section class="mt-16">
-            <h2 class="text-2xl font-bold text-book-dark mb-8">Libros relacionados</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="group cursor-pointer">
-                    <div class="relative overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-shadow">
-                        <img src="https://images.ecestaticos.com/PIK0kKxTNRVBMbAp-kQooTdcLnI=/2x1:1667x2560/1440x1920/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F78f%2F762%2Ff46%2F78f762f46de147f15e6fbda967974551.jpg" 
-                             alt="Quinta Estación" 
-                             class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="font-semibold text-book-dark group-hover:text-book-gold transition-colors">El Manifiesto Comunista</h3>
-                        <p class="text-gray-600 text-sm">Karl Marx</p>
-                        <p class="font-bold text-book-gold mt-2">$18.00</p>
-                    </div>
-                </div>
-                
-                <div class="group cursor-pointer">
-                    <div class="relative overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-shadow">
-                        <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1715701901-autobiografia-malala-66438877dde9f.jpg?crop=1xw:1xh;center,top&resize=980:*" 
-                             alt="Teoría Económica" 
-                             class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="font-semibold text-book-dark group-hover:text-book-gold transition-colors">Teoría General</h3>
-                        <p class="text-gray-600 text-sm">John M. Keynes</p>
-                        <p class="font-bold text-book-gold mt-2">$42.00</p>
-                    </div>
-                </div>
-                
-                <div class="group cursor-pointer">
-                    <div class="relative overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-shadow">
-                        <img src="https://www.crisol.com.pe/media/catalog/product/cache/f6d2c62455a42b0d712f6c919e880845/9/7/9786125020208_8t8qmxx6r0hkrpjj.jpg" 
-                             alt="Economía Política" 
-                             class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="font-semibold text-book-dark group-hover:text-book-gold transition-colors">Riqueza de las Naciones</h3>
-                        <p class="text-gray-600 text-sm">Adam Smith</p>
-                        <p class="font-bold text-book-gold mt-2">$38.00</p>
-                    </div>
-                </div>
-                
-                <div class="group cursor-pointer">
-                    <div class="relative overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-shadow">
-                        <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1740746707-51oXDQhF8ZL._SL500_.jpg?crop=1xw:0.996xh;center,top&resize=980:*" 
-                             alt="Historia Económica" 
-                             class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="font-semibold text-book-dark group-hover:text-book-gold transition-colors">Historia del Análisis Económico</h3>
-                        <p class="text-gray-600 text-sm">Joseph Schumpeter</p>
-                        <p class="font-bold text-book-gold mt-2">$55.00</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Success modal -->
-    <div id="success-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div class="mt-3 text-center">
-                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                    <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg leading-6 font-medium text-gray-900 mt-4">¡Agregado al carrito!</h3>
-                <div class="mt-2 px-7 py-3">
-                    <p class="text-sm text-gray-500">El libro ha sido agregado exitosamente a tu carrito de compras.</p>
-                </div>
-                <div class="items-center px-4 py-3">
-                    <button id="modal-ok" class="px-4 py-2 bg-book-dark text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-book-brown focus:outline-none focus:ring-2 focus:ring-book-gold">
-                        Continuar comprando
-                    </button>
-                    <a href="/carrito" class="mt-3 px-4 py-2 bg-book-gold text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-book-gold inline-block text-center">
-                        Ver carrito
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function updateQuantity(change) {
-            const quantityInput = document.getElementById('quantity');
-            let currentQuantity = parseInt(quantityInput.value);
-            let newQuantity = Math.max(1, Math.min(15, currentQuantity + change));
-            quantityInput.value = newQuantity;
-        }
-
-        function addToCart() {
-            const quantity = document.getElementById('quantity').value;
-            
-            // Here you would normally send a request to your backend
-            // For now, we'll just show the success modal
-            
-            // Simulate adding to cart
-            document.getElementById('success-modal').classList.remove('hidden');
-            
-            // Update cart counter in header
-            const cartCounter = document.querySelector('.absolute.-top-2.-right-2');
-            if (cartCounter) {
-                let currentCount = parseInt(cartCounter.textContent);
-                cartCounter.textContent = currentCount + parseInt(quantity);
-            }
-        }
-
-        function showTab(tabName) {
-            // Hide all tabs
-            document.getElementById('description-tab').classList.add('hidden');
-            document.getElementById('details-tab').classList.add('hidden');
-            document.getElementById('reviews-tab').classList.add('hidden');
-            
-            // Remove active class from all buttons
-            const buttons = document.querySelectorAll('nav button');
-            buttons.forEach(button => {
-                button.className = 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm';
-            });
-            
-            // Show selected tab
-            if (tabName === 'description') {
-                document.getElementById('description-tab').classList.remove('hidden');
-                buttons[0].className = 'border-book-gold text-book-gold whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm';
-            } else if (tabName === 'details') {
-                document.getElementById('details-tab').classList.remove('hidden');
-                buttons[1].className = 'border-book-gold text-book-gold whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm';
-            } else if (tabName === 'reviews') {
-                document.getElementById('reviews-tab').classList.remove('hidden');
-                buttons[2].className = 'border-book-gold text-book-gold whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm';
-            }
-        }
-
-        // Close modal functionality
-        document.getElementById('modal-ok').addEventListener('click', function() {
-            document.getElementById('success-modal').classList.add('hidden');
-        });
-
-        // Close modal when clicking outside
-        document.getElementById('success-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.add('hidden');
-            }
-        });
-    </script>
+    </footer>
 </body>
 </html>
