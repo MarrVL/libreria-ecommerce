@@ -39,17 +39,17 @@
     </style>
 </head>
 <body class="bg-book-cream">
-    <!-- Cabezera -->
+    <!-- Cabecera -->
     <header class="bg-white shadow-lg sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
-                <div class="flex items-center">
+                <a href="/" class="flex items-center hover:opacity-80 transition-opacity">
                     <img class="h-10 w-10 mr-3" src="{% static 'img/logo_ecommerce_libreria.png' %}" alt="Logo_Lecturama">
                     <span class="text-2xl font-bold text-book-dark">Lecturama</span>
-                </div>
+                </a>
                 
-                <!-- Navegación de escritorio -->
+                <!-- Navegacion -->
                 <div class="hidden md:flex space-x-8">
                     <a href="#bestsellers" class="text-book-dark hover:text-book-gold transition-colors font-medium">Lo más vendido</a>
                     <a href="#new" class="text-book-dark hover:text-book-gold transition-colors font-medium">Novedades</a>
@@ -75,7 +75,7 @@
                     </a>
                 </div>
                 
-                <!-- Botón de menú -->
+                <!-- Boton de menu -->
                 <div class="md:hidden">
                     <button type="button" class="text-book-dark hover:text-book-gold">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -87,10 +87,10 @@
         </nav>
     </header>
 
-    <!--Contenido Principal - Carrito -->
+    <!-- Contenido Principal - Carrito -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="cart-card overflow-hidden">
-            <!-- Cabezera del carrito -->
+            <!-- Cabecera del carrito -->
             <div class="bg-gradient-to-r from-book-brown to-book-gold px-8 py-6">
                 <h2 class="text-center text-3xl font-bold text-white">Tu carrito</h2>
             </div>
@@ -116,12 +116,12 @@
                         {% endfor %}
                     </div>
 
-                    <!-- Vista del total -->
+                    <!-- Total -->
                     <div class="mt-8 bg-gradient-to-r from-book-brown to-book-gold rounded-xl p-6 text-center">
                         <p class="text-3xl font-bold text-white">Total: ${{ total }}</p>
                     </div>
 
-                    <!-- Botón de pago -->
+                    <!-- Boton de pago -->
                     <div class="mt-6 text-center">
                         <button class="bg-book-dark hover:bg-opacity-80 text-white px-12 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:shadow-lg">
                             Proceder al pago
@@ -129,7 +129,7 @@
                     </div>
 
                 {% else %}
-                    <!-- Carrito vacio -->
+                    <!-- CArrito vacio -->
                     <div class="text-center py-16">
                         <div class="text-8xl mb-6">🛒</div>
                         <p class="text-2xl text-gray-600 mb-8">Tu carrito está vacío</p>
@@ -139,7 +139,7 @@
                     </div>
                 {% endif %}
 
-                <!-- Enlace -->
+                <!-- Link -->
                 <div class="mt-8 text-center">
                     <a href="/" class="inline-flex items-center text-book-gold hover:text-book-brown font-medium text-lg transition-colors">
                         <span class="mr-2">←</span>
@@ -150,7 +150,7 @@
         </div>
     </main>
 
-    <!-- Pie de página -->
+    <!-- Pie de Pagina -->
     <footer class="bg-book-dark text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
