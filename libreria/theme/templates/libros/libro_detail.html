@@ -27,12 +27,12 @@
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
-                <div class="flex items-center">
+                <a href="/" class="flex items-center hover:opacity-80 transition-opacity">
                     <img class="h-10 w-10 mr-3" src="{% static 'img/logo_ecommerce_libreria.png' %}" alt="Logo_Lecturama">
                     <span class="text-2xl font-bold text-book-dark">Lecturama</span>
-                </div>
+                </a>
                 
-                <!-- Navegación de escritorio -->
+                <!-- Navegacion -->
                 <div class="hidden md:flex space-x-8">
                     <a href="#bestsellers" class="text-book-dark hover:text-book-gold transition-colors font-medium">Lo más vendido</a>
                     <a href="#new" class="text-book-dark hover:text-book-gold transition-colors font-medium">Novedades</a>
@@ -58,7 +58,7 @@
                     </a>
                 </div>
                 
-                <!-- Botón de menú -->
+                <!-- Boton de menu -->
                 <div class="md:hidden">
                     <button type="button" class="text-book-dark hover:text-book-gold">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -73,15 +73,15 @@
     <!-- Contenido Principal -->
     <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <!-- Titulo del libro -->
+            <!-- Titulo del Libro -->
             <div class="bg-gradient-to-r from-book-brown to-book-gold px-8 py-6">
                 <h1 class="text-center text-3xl font-bold text-white">{{ libro.titulo }}</h1>
             </div>
 
-            <!-- Contenido del libro -->
+            <!-- Contenido del Libro -->
             <div class="p-8">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <!-- Imagen del libro -->
+                    <!-- Imagen del Libro -->
                     <div class="text-center">
                         {% if libro.imagen %}
                             <img src="{{ libro.imagen.url }}" 
@@ -94,7 +94,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Informacion del libro -->
+                    <!-- Informacion del Libro -->
                     <div class="space-y-6">
                         <!-- Precio -->
                         <div class="flex items-center p-6 bg-gradient-to-r from-book-cream to-white rounded-xl border-l-4 border-book-gold">
@@ -114,7 +114,7 @@
                             <span class="text-gray-700 text-lg">{{ libro.editorial }}</span>
                         </div>
 
-                        <!-- Autores -->
+                        <!-- Autor -->
                         <div class="flex items-center p-6 bg-gradient-to-r from-book-cream to-white rounded-xl border-l-4 border-book-gold">
                             <span class="font-semibold text-book-dark text-lg min-w-[120px]">Autores:</span>
                             <span class="text-gray-700 text-lg">
@@ -124,7 +124,7 @@
                             </span>
                         </div>
 
-                        <!-- Añadir al carrito -->
+                        <!-- Añadir al Carrito -->
                         <div class="pt-6">
                             <a href="{% url 'agregar_al_carrito' libro.id %}" 
                                class="w-full inline-block bg-gradient-to-r from-book-brown to-book-gold text-white text-center py-4 px-8 rounded-full font-semibold text-xl transition-all duration-200 hover:shadow-lg hover:scale-105">
@@ -134,7 +134,7 @@
                     </div>
                 </div>
 
-                <!-- Descripcion del libro -->
+                <!-- Descripcion -->
                 {% if libro.descripcion %}
                 <div class="mt-12 p-8 bg-gradient-to-r from-book-cream to-white rounded-xl border-l-4 border-book-gold">
                     <h3 class="text-2xl font-semibold text-book-dark mb-4">Descripción:</h3>
@@ -142,7 +142,7 @@
                 </div>
                 {% endif %}
 
-                <!-- Enlace -->
+                <!-- Link -->
                 <div class="mt-8 text-center">
                     <a href="/" class="inline-flex items-center text-book-gold hover:text-book-brown font-medium text-lg transition-colors">
                         <span class="mr-2">←</span>
@@ -153,7 +153,7 @@
         </div>
     </main>
 
-    <!-- Pie de página -->
+    <!-- Pie de Pagina -->
     <footer class="bg-book-dark text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
