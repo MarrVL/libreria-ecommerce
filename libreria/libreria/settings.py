@@ -155,11 +155,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none' # o 'optional', 'mandatory'
-SOCIALACCOUNT_QUERY_EMAIL = True # Para que allauth solicite el email de Google
+ACCOUNT_LOGIN_METHODS = ['email'] # Nuevo equivalente para ACCOUNT_AUTHENTICATION_METHOD
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password*', 'password2*'] # Nuevo equivalente para ACCOUNT_EMAIL_REQUIRED y ACCOUNT_USERNAME_REQUIRED
+ACCOUNT_EMAIL_VERIFICATION = 'none' # Mantener como está, o configurar a 'optional', 'mandatory'
+SOCIALACCOUNT_QUERY_EMAIL = True # Mantener como está
 
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
