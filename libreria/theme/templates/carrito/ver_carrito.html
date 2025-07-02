@@ -87,10 +87,10 @@
         </nav>
     </header>
 
-    <!-- Main Content - Carrito -->
+    <!-- Contenido Principal - Carrito -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="cart-card overflow-hidden">
-            <!-- Header del carrito -->
+            <!-- Cabecera del carrito -->
             <div class="bg-gradient-to-r from-book-brown to-book-gold px-8 py-6">
                 <h2 class="text-center text-3xl font-bold text-white">Tu carrito</h2>
             </div>
@@ -116,12 +116,12 @@
                         {% endfor %}
                     </div>
 
-                    <!-- Total Section -->
+                    <!-- Total -->
                     <div class="mt-8 bg-gradient-to-r from-book-brown to-book-gold rounded-xl p-6 text-center">
                         <p class="text-3xl font-bold text-white">Total: ${{ total }}</p>
                     </div>
 
-                    <!-- Checkout Button -->
+                    <!-- Boton de pago -->
                     <div class="mt-6 text-center">
                         <button class="bg-book-dark hover:bg-opacity-80 text-white px-12 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:shadow-lg">
                             Proceder al pago
@@ -129,7 +129,7 @@
                     </div>
 
                 {% else %}
-                    <!-- Empty Cart -->
+                    <!-- CArrito vacio -->
                     <div class="text-center py-16">
                         <div class="text-8xl mb-6">🛒</div>
                         <p class="text-2xl text-gray-600 mb-8">Tu carrito está vacío</p>
@@ -139,7 +139,7 @@
                     </div>
                 {% endif %}
 
-                <!-- Back Link -->
+                <!-- Link -->
                 <div class="mt-8 text-center">
                     <a href="/" class="inline-flex items-center text-book-gold hover:text-book-brown font-medium text-lg transition-colors">
                         <span class="mr-2">←</span>
@@ -150,7 +150,7 @@
         </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Pie de Pagina -->
     <footer class="bg-book-dark text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
