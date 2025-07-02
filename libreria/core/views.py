@@ -37,21 +37,28 @@ def registro(request):
 
 @login_required
 def agregar_al_carrito(request, libro_id):
-    libro = get_object_or_404(Libro, id=libro_id)
+   libro = get_object_or_404(Libro, id=libro_id)
 
-    # Busca o crea el carrito del usuario actual
-    carrito, creado = Carrito.objects.get_or_create(usuario=request.user)
+   # Busca o crea el carrito del usuario actual
+   carrito, creado = Carrito.objects.get_or_create(usuario=request.user)
 
-    # Busca si el libro ya está en el carrito
-    item, creado = ItemCarrito.objects.get_or_create(carrito=carrito, libro=libro)
+   # Obtener la cantidad del formulario
+   cantidad = int(request.POST.get('cantidad', 1))
 
-    if not creado:
-        # Si ya estaba, incrementa la cantidad
-        item.cantidad += 1
-    item.save()
+   # Busca si el libro ya está en el carrito
+   item, creado = ItemCarrito.objects.get_or_create(carrito=carrito, libro=libro)
 
-    return redirect('ver_carrito')
+   if not creado:
+       # Si ya estaba, suma la nueva cantidad
+       item.cantidad += cantidad
+   else:
+       # Si es nuevo, establece la cantidad
+       item.cantidad = cantidad
+   
+   item.save()
 
+   return redirect('ver_carrito')
+   
 @login_required
 def ver_carrito(request):
     carrito, creado = Carrito.objects.get_or_create(usuario=request.user)

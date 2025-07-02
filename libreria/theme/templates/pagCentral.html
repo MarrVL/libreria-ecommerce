@@ -22,7 +22,7 @@
     </script>
 </head>
 <body class="bg-book-cream">
-    <!-- Header -->
+    <!-- Cabeza -->
     <header class="bg-white shadow-lg sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -32,7 +32,7 @@
                     <span class="text-2xl font-bold text-book-dark">Lecturama</span>
                 </div>
                 
-                <!-- Desktop Navigation -->
+                <!-- Navegación de escritorio -->
                 <div class="hidden md:flex space-x-8">
                     <a href="#bestsellers" class="text-book-dark hover:text-book-gold transition-colors font-medium">Lo más vendido</a>
                     <a href="#new" class="text-book-dark hover:text-book-gold transition-colors font-medium">Novedades</a>
@@ -42,7 +42,7 @@
                     <a href="#teen" class="text-book-dark hover:text-book-gold transition-colors font-medium">Juvenil</a>
                 </div>
                 
-                <!-- Right side -->
+                <!-- Lado derecho -->
                 <div class="flex items-center space-x-4">
                     <button class="text-book-dark hover:text-book-gold transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,7 +59,7 @@
                     </a>
                 </div>
                 
-                <!-- Mobile menu button -->
+                <!-- Botón de menú móvil -->
                 <div class="md:hidden">
                     <button type="button" class="text-book-dark hover:text-book-gold">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -71,7 +71,7 @@
         </nav>
     </header>
 
-    <!-- Hero Banner -->
+    <!-- Estandarte de héroe -->
     <section class="relative overflow-hidden bg-gradient-to-r from-book-brown to-book-gold">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="text-center">
@@ -86,7 +86,7 @@
                 </button>
             </div>
         </div>
-        <!-- Eleementos decorativos -->
+        <!-- Elementos decorativos -->
         <div class="absolute top-10 left-10 w-16 h-16 bg-white bg-opacity-20 rounded-full"></div>
         <div class="absolute bottom-10 right-10 w-24 h-24 bg-white bg-opacity-10 rounded-full"></div>
     </section>
@@ -184,6 +184,12 @@
                         <li><a href="#" class="hover:text-book-gold transition-colors">Envíos</a></li>
                         <li><a href="#" class="hover:text-book-gold transition-colors">Devoluciones</a></li>
                         <li><a href="#" class="hover:text-book-gold transition-colors">FAQ</a></li>
+                        {% with numero="51987654321" mensaje="Hola, necesito ayuda con mi pedido" %}
+                        <a href="https://wa.me/51976159076?text=hola%20quiero%20mas%20informacion%20vengo%20de%20la%20pagina%20de%20Django" class="btn btn-success">
+                            Contáctanos por WhatsApp
+                        </a>
+                        {% endwith %}
+                        
                     </ul>
                 </div>
                 
