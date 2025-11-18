@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -107,8 +108,12 @@ WSGI_APPLICATION = 'libreria.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',  
+        'NAME': os.environ.get('DB_NAME', 'lecturama'),
+        'USER': os.environ.get('DB_USER', 'lecturamaUser'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '~PRYF-UB,68r+z3|'),
+        'HOST': os.environ.get('DB_HOST', '34.176.155.225'), 
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
@@ -154,11 +159,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none' # o 'optional', 'mandatory'
-SOCIALACCOUNT_QUERY_EMAIL = True # Para que allauth solicite el email de Google
+ACCOUNT_LOGIN_METHODS = {'email': {}}
 
-LOGIN_REDIRECT_URL = '/'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+# If you want email-only signup (no username, email is required)
+ACCOUNT_SIGNUP_FIELDS = [
+    'email*',        # * means required
+    'password1*',
+    'password2*',
+]
