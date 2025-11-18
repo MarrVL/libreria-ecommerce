@@ -110,9 +110,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',  
         'NAME': os.environ.get('DB_NAME', 'lecturama'),
-        'USER': os.environ.get('DB_USER', 'lecturamaUser'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '~PRYF-UB,68r+z3|'),
-        'HOST': os.environ.get('DB_HOST', '34.176.155.225'), 
+        'USER': os.environ.get('DB_USER', 'lecturama-user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'VaD=T~oDG{Y)z6u/'),
+        'HOST': os.environ.get('DB_HOST', '34.176.183.32'), 
         'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
@@ -163,7 +163,7 @@ ACCOUNT_LOGIN_METHODS = {'email': {}}
 
 # If you want email-only signup (no username, email is required)
 ACCOUNT_SIGNUP_FIELDS = [
-    'email*',        # * means required
+    'email*',        
     'password1*',
     'password2*',
 ]
