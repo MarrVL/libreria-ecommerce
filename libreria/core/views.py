@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Libro, Carrito, ItemCarrito
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from .forms import CustomUserCreationForm #Agregado para el correo
+from django.core.mail import send_mail #agregado
 # Create your views here.
 
 def home(request):
@@ -9,12 +11,34 @@ def home(request):
 
 def registro(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login')
+            user = form.save() # El usuario debe guardarse primero
+
+            # --- BLOQUE DE ENVÍO DE CORREO ---
+            subject = '¡Cuenta Creada con Éxito en Lecturama!'
+            message = (
+                f'Hola {user.username},\n\n'
+                'Tu cuenta ha sido creada exitosamente. '
+                'Ahora puedes iniciar sesión con tu nombre de usuario y contraseña.'
+                '\n\nSaludos,\nEl equipo de Lecturama'
+            )
+            
+            # La función send_mail usa el email del usuario recién creado
+            send_mail(
+                subject,
+                message,
+                'no-responder@lecturama.com', # Esto debe coincidir con DEFAULT_FROM_EMAIL
+                [user.email],                  # <--- Usa el email del usuario
+                fail_silently=False,           # <--- Desactivamos el silencio para ver errores
+            )
+            
+            # ------------------------------------
+
+            return redirect('login') 
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
+        
     return render(request, 'registration/registro.html', {'form': form})
 
 @login_required

@@ -1,0 +1,14 @@
+Hola {{ user.username|default:user.email }},
+
+¡Felicidades! Tu cuenta ha sido creada con éxito en Lecturama.
+
+Para completar el proceso y activar tu cuenta, haz clic en el siguiente enlace:
+
+{{ activate_url }}
+
+Una vez que tu cuenta esté verificada, podrás iniciar sesión con tu correo y contraseña.
+
+Si no solicitaste esta cuenta, puedes ignorar este correo.
+
+Saludos,
+El equipo de Lecturama

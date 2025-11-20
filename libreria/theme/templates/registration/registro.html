@@ -1,3 +1,5 @@
+{% load widget_tweaks %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,17 +30,27 @@
         <form method="post" class="space-y-5">
             {% csrf_token %}
 
+            {% with input_class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-book-gold focus:border-book-gold" %}
+            
             <div>
                 <label for="{{ form.username.id_for_label }}" class="block font-medium text-book-dark mb-1">Usuario</label>
-                {{ form.username }}
+                {% render_field form.username class=input_class %}
                 {% if form.username.errors %}
                     <p class="text-red-500 text-sm mt-1">{{ form.username.errors }}</p>
                 {% endif %}
             </div>
 
             <div>
+                <label for="{{ form.email.id_for_label }}" class="block font-medium text-book-dark mb-1">Correo Electrónico</label>
+                {% render_field form.email class=input_class type="email" %}
+                {% if form.email.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.email.errors }}</p>
+                {% endif %}
+            </div>
+            
+            <div>
                 <label for="{{ form.password1.id_for_label }}" class="block font-medium text-book-dark mb-1">Contraseña</label>
-                {{ form.password1 }}
+                {% render_field form.password1 class=input_class %}
                 {% if form.password1.errors %}
                     <ul class="text-red-500 text-sm mt-1 list-disc list-inside">
                         {% for error in form.password1.errors %}
@@ -50,11 +62,13 @@
 
             <div>
                 <label for="{{ form.password2.id_for_label }}" class="block font-medium text-book-dark mb-1">Confirmar Contraseña</label>
-                {{ form.password2 }}
+                {% render_field form.password2 class=input_class %}
                 {% if form.password2.errors %}
                     <p class="text-red-500 text-sm mt-1">{{ form.password2.errors }}</p>
                 {% endif %}
             </div>
+            
+            {% endwith %}
 
             <button type="submit" class="w-full bg-book-gold text-white py-2 rounded-lg hover:bg-yellow-600 transition">
                 Registrarme
@@ -62,7 +76,7 @@
         </form>
 
         <p class="mt-4 text-sm text-center">
-            ¿Ya tienes cuenta? <a href="{% url 'login' %}" class="text-book-gold hover:underline">Inicia sesión</a>
+            ¿Ya tienes cuenta? <a href="{% url 'account_login' %}" class="text-book-gold hover:underline">Inicia sesión</a>
         </p>
     </div>
 
