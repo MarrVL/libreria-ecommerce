@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
-import os 
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,15 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qk#t0l^i0**)h89r4o%=sjou!dtz4*!xj3u^^50ra8u42ybz=9'
+SECRET_KEY = 'django-insecure-qk#t0l^i0*)h89r4o%=sjou!dtz4!xj3u^^50ra8u42ybz=9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Application definition
 
@@ -40,7 +37,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'widget_tweaks',
     'core',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,10 +47,10 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',    
+    'widget_tweaks', #AGREGADO MARR
 ]
 
 STATIC_URL = '/static/'
-
 
 SITE_ID = 1
 
@@ -113,8 +109,12 @@ WSGI_APPLICATION = 'libreria.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',  
+        'NAME': os.environ.get('DB_NAME', 'lecturama'),
+        'USER': os.environ.get('DB_USER', 'lecturama-user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'VaD=T~oDG{Y)z6u/'),
+        'HOST': os.environ.get('DB_HOST', '34.176.183.32'), 
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
@@ -160,11 +160,22 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none' # o 'optional', 'mandatory'
-SOCIALACCOUNT_QUERY_EMAIL = True # Para que allauth solicite el email de Google
+ACCOUNT_LOGIN_METHODS = {'email': {}}
 
-LOGIN_REDIRECT_URL = '/'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+# If you want email-only signup (no username, email is required)
+ACCOUNT_SIGNUP_FIELDS = [
+    'email*',        
+    'password1*',
+    'password2*',
+]
+
+#AGREGADO MARR
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+
+DEFAULT_FROM_EMAIL = 'no-responder@lecturama.com'
+
+LOGIN_REDIRECT_URL = '/' 
+
+LOGOUT_REDIRECT_URL = '/'
