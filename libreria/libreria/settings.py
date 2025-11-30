@@ -11,22 +11,25 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qk#t0l^i0*)h89r4o%=sjou!dtz4!xj3u^^50ra8u42ybz=9'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool) 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -47,7 +50,6 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',    
-    'widget_tweaks', #AGREGADO MARR
 ]
 
 STATIC_URL = '/static/'
@@ -109,12 +111,12 @@ WSGI_APPLICATION = 'libreria.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  
-        'NAME': os.environ.get('DB_NAME', 'lecturama'),
-        'USER': os.environ.get('DB_USER', 'lecturama-user'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'VaD=T~oDG{Y)z6u/'),
-        'HOST': os.environ.get('DB_HOST', '34.176.183.32'), 
-        'PORT': os.environ.get('DB_PORT', '5432'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME', default=None),       
+        'USER': config('DB_USER', default=None),       
+        'PASSWORD': config('DB_PASSWORD', default=None), 
+        'HOST': config('DB_HOST', default=None),         
+        'PORT': config('DB_PORT', default=None), 
     }
 }
 
@@ -169,13 +171,14 @@ ACCOUNT_SIGNUP_FIELDS = [
     'password2*',
 ]
 
-#AGREGADO MARR
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_EMAIL_REQUIRED = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
-
-DEFAULT_FROM_EMAIL = 'no-responder@lecturama.com'
-
-LOGIN_REDIRECT_URL = '/' 
-
-LOGOUT_REDIRECT_URL = '/'
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    GS_BUCKET_NAME = config('GS_BUCKET_NAME', default=None)
+    # Añade estas rutas para que Django sepa dónde están tus estáticos locales
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
+    # La carpeta donde se recolectarán los archivos
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')
